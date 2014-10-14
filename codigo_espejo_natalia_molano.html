@@ -1,0 +1,175 @@
+<html>
+
+	<head>
+	</head>
+	
+	<body>
+        <style>
+		
+			@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+			html { width: 100%; height:100%; overflow:hidden; }
+
+			body { 
+				width: 100%;
+				height:100%;
+				font-family: 'Open Sans', sans-serif;
+				background: #092756;	
+				background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), 
+							-webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), 
+							-webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);	
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+			}
+			.login { 
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin: -150px 0 0 -150px;
+				width:300px;
+				height:300px;
+			}
+			.login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+
+			input { 
+				width: 100%; 
+				margin-bottom: 10px; 
+				background: rgba(0,0,0,0.3);
+				border: none;
+				outline: none;
+				padding: 10px;
+				font-size: 13px;
+				color: #fff;
+				text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+				border: 1px solid rgba(0,0,0,0.3);
+				border-radius: 4px;
+				box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+				-webkit-transition: box-shadow .5s ease;
+				-moz-transition: box-shadow .5s ease;
+				-o-transition: box-shadow .5s ease;
+				-ms-transition: box-shadow .5s ease;
+				transition: box-shadow .5s ease;
+			}
+			input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
+        </style>
+		<script>
+			//funcion para codificar una letra
+			function convertir_letra(p_letra_in){
+			  var v_letra_in, v_letra_out;
+			  //colocar la letra de entrada en minuscula antes de hacer las comparaciones
+			  v_letra_in = p_letra_in.toLowerCase();
+
+			  if (v_letra_in == 'a'){
+				v_letra_out = 'z';
+			  }else if(v_letra_in == 'b'){
+				v_letra_out = 'y';
+			  }else if(v_letra_in == 'c'){
+				v_letra_out = 'x';
+			  }else if(v_letra_in == 'd'){
+				v_letra_out = 'w';
+			  }else if(v_letra_in == 'e'){
+				v_letra_out = 'v';
+			  }else if(v_letra_in == 'f'){
+				v_letra_out = 'u';
+			  }else if(v_letra_in == 'g'){
+				v_letra_out = 't';
+			  }else if(v_letra_in == 'h'){
+				v_letra_out = 's';
+			  } else if(v_letra_in == 'i'){
+				v_letra_out = 'r';
+			  } else if(v_letra_in == 'j'){
+				v_letra_out = 'q';
+			  } else if(v_letra_in == 'k'){
+				v_letra_out = 'p';
+			  } else if(v_letra_in == 'l'){
+				v_letra_out = 'o';
+			  } else if(v_letra_in == 'm'){
+				v_letra_out = 'n';
+			  } else if(v_letra_in == 'n'){
+				v_letra_out = 'm';
+			  } else if(v_letra_in == 'o'){
+				v_letra_out = 'l';
+			  } else if(v_letra_in == 'p'){
+				v_letra_out = 'k';
+			  } else if(v_letra_in == 'q'){
+				v_letra_out = 'j';
+			  } else if(v_letra_in == 'r'){
+				v_letra_out = 'i';
+			  } else if(v_letra_in == 's'){
+				v_letra_out = 'h';
+			  } else if(v_letra_in == 't'){
+				v_letra_out = 'g';
+			  } else if(v_letra_in == 'u'){
+				v_letra_out = 'f';
+			  } else if(v_letra_in == 'v'){
+				v_letra_out = 'e';
+			  } else if(v_letra_in == 'w'){
+				v_letra_out = 'd';
+			  }else if(v_letra_in == 'x'){
+				v_letra_out = 'c';
+			  }else if(v_letra_in == 'y'){
+				v_letra_out = 'b';
+			  }else if(v_letra_in == 'z'){
+				v_letra_out = 'a';
+			  }else if(v_letra_in == ' '){
+				v_letra_out = ' ';  //En caso de ingresar espacios se conservan
+			  }else{
+				v_letra_out = v_letra_in;  //Si ingresan simbolos no se codifican (se dejan tal cual como ingresan)
+			  }
+				
+			  //Retornamos la letra codificada
+			  return v_letra_out;
+			  
+			}
+
+			//funcion para cdificar una palabra completa
+			function convertir_palabra(p_palabra_in){
+			 //Esta es la palabra de entrada (palabra original)
+			 //alert("palabra de entrada: "+p_palabra_in);  
+			  
+			  var v_palabra_in, v_palabra_out, v_letra_cambiada;
+			  //inicializamos la palabra de salida como una cadena de caracteres vacia Nata
+			  v_palabra_out = '';
+			  
+			  //recorremos cada una de las letras de la palabra y la convertimos
+			  for(var i = 0; i < p_palabra_in.length; i++){    
+				
+				//almacenamos en la variable v_letra_cambiada el resultado de la conversion/codificacion
+				v_letra_cambiada = convertir_letra(p_palabra_in[i]); //la funcion convertir_letra retorna el resultado de la conversion (de una letra)
+				
+				//concatenamos en la variable v_palabra_out la letra codificada en la linea anterior
+				v_palabra_out = v_palabra_out + v_letra_cambiada;
+				
+			  }    			 
+
+			  //colocamos la palabra de salida en el campo con id = palabraDeSalida
+			  document.getElementById("palabraDeSalida").value = v_palabra_out;
+			  
+			}
+
+			//funcion que da inicio al programa
+			function iniciar_programa()
+			{   
+				//recuperamos el valor ingresado en el campo con id = palabraDeEntrada
+				var p_palabra_entrada = document.getElementById("palabraDeEntrada").value;
+				
+				//hacemos el llamado a convertir_palabra 
+				convertir_palabra(p_palabra_entrada);
+			}
+
+			//llamado a iniciar_programa cuando el documento esta cargado
+			/*document.onload = iniciar_programa();*/
+
+		</script>
+	    <div class="login">
+	     <h1>C&oacute;digo Espejo</h1>
+		<input type="text" id="palabraDeEntrada"  name="u" placeholder="Escriba aca el texto a convertir" required="required"/>
+		<br/>
+		<input type="text" id="palabraDeSalida" value="" disabled="disabled" size="25"/>
+		&nbsp;
+		
+		<input type="button" value="Convertir palabra" onclick="iniciar_programa()" />
+		</div>	
+		
+	</body>
+
+</html>
